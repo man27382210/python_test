@@ -135,16 +135,3 @@ class SeerXNode:
 testGraph = citeGraph()
 testGraph.search_title("text")
 testGraph.click_search(0)
-
-# test = SeerXNode()
-# #test_list = []
-# #test_list = test.search_title("text")
-# #parse to frontend, select which index
-# test.get_doc(testGraph_List[0].paper.url)
-# print ("list_url:%s" % testGraph_List[0].paper.url)
-# test.printRefCite()
-
-#next node
-# print ("url:%s" % test.ref_list[1].paper.url)
-# test.get_doc(test.ref_list[1].paper.url)
-# test.printRefCite()
