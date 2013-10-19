@@ -72,7 +72,7 @@ class SeerXNode:
     	self.ref_list = [] # SeerXNode(s)
     	self.cite_list = [] # SeerXNode(s)
         self.doc_soup = ""
-        
+
     def get_doc(self):
         self.doc_soup = BeautifulSoup(urllib2.urlopen(self.citeseerx_url+str(self.paper.url)))
         #self.paper.insert() insert title, url
