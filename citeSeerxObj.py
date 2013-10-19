@@ -50,12 +50,20 @@ class citeGraph:
         except Exception, e:
             print ("exception search find next page")
         return self.search_list
-    # def click(self, nodeIndex):
-    #     newNode = SeerXNode()
-    #     newNode = self.node_List[nodeIndex]
-    #     newNode.get_doc()
+    
+    def click_search(self, nodeIndex):
+        newSearchNode = SeerXNode()
+        newSearchNode = self.search_list[nodeIndex]
+        self.node_List.append(newSearchNode)
+        newSearchNode.get_doc()
+        newSearchNode.printRefCite()
+        self.click(newSearchNode.ref_list[1])
 
-
+    def click(self, nextNode):
+        print ("next Node : %s " % nextNode.paper.url)
+        self.node_List.append(nextNode)
+        nextNode.get_doc()
+        nextNode.printRefCite()
 
 class SeerXNode:
     def __init__(self):
@@ -64,10 +72,10 @@ class SeerXNode:
     	self.ref_list = [] # SeerXNode(s)
     	self.cite_list = [] # SeerXNode(s)
         self.doc_soup = ""
-
-    def get_doc(self, paper_url):
-        self.doc_soup = BeautifulSoup(urllib2.urlopen(self.citeseerx_url+str(paper_url)))
-        #self.paper..insert() insert title, url
+        
+    def get_doc(self):
+        self.doc_soup = BeautifulSoup(urllib2.urlopen(self.citeseerx_url+str(self.paper.url)))
+        #self.paper.insert() insert title, url
         #ref
         all_ref_tar = self.doc_soup.find("div",{"id":"citations"})
         all_ref_tar = all_ref_tar.find_all("tr")
@@ -76,6 +84,8 @@ class SeerXNode:
         cite_url = self.doc_soup.find("tr",{"id":"docCites"})
         cite_url = self.citeseerx_url + cite_url.find('a')['href']
         self.get_cite(cite_url)
+
+        return self
 
     def get_ref(self, all_ref):
         for ref in all_ref:
@@ -123,16 +133,16 @@ class SeerXNode:
             print ("")
 
 testGraph = citeGraph()
-testGraph_List = []
-testGraph_List = testGraph.search_title("text")
+testGraph.search_title("text")
+testGraph.click_search(0)
 
-test = SeerXNode()
-#test_list = []
-#test_list = test.search_title("text")
-#parse to frontend, select which index
-test.get_doc(testGraph_List[0].paper.url)
-print ("list_url:%s" % testGraph_List[0].paper.url)
-test.printRefCite()
+# test = SeerXNode()
+# #test_list = []
+# #test_list = test.search_title("text")
+# #parse to frontend, select which index
+# test.get_doc(testGraph_List[0].paper.url)
+# print ("list_url:%s" % testGraph_List[0].paper.url)
+# test.printRefCite()
 
 #next node
 # print ("url:%s" % test.ref_list[1].paper.url)
