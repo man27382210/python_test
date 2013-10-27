@@ -1,6 +1,7 @@
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup, NavigableString
 import urllib2
 import sys
+import re
 
 class paperObj:
     def __init__(self):
@@ -17,25 +18,37 @@ class citeGraph:
         self.tree_List = []
         self.search_list = [] #change to citeTree
         self.next_count = 0 # change to citeTree
+        self.cite_url = "http://citeseerx.ist.psu.edu"
 
     def search_title(self, search_text): #change to cite Tree
         #text_parse
-        return self.search('http://citeseerx.ist.psu.edu/search?q=Adapting+to+Network+and+Client+Variation+Using+Active+Proxies&submit=Search&sort=rlv&t=doc')
+        search_text = search_text.replace(" ", "+");
+        #return self.search('http://citeseerx.ist.psu.edu/search?q=Adapting+to+Network+and+Client+Variation+Using+Active+Proxies&submit=Search&sort=rlv&t=doc') 
+        return self.search('http://citeseerx.ist.psu.edu/search?q='+search_text+'&submit=Search&sort=rlv&t=doc')
 
     def search(self, search_text):
         search_resp = urllib2.urlopen(search_text)
         search_soup = BeautifulSoup(search_resp)
-        search_result = search_soup.find_all("div", {"class":"result"})
+        search_result = search_soup.findAll("div", {"class":"result"})
         for search_url in search_result:
             try:
                 #print search_url.find("a",{"class":"remove doc_details"})['href']
-                #print search_url.find("a",{"class":"remove doc_details"}).text
+                #dataTitle =  search_url.find("a",{"class":"remove doc_details"}).text
+                #self.striphtml(search_url.find("a",{"class":"remove doc_details"}).text)
+                #dataTitle = self.striphtml(dataTitle)
+                #print search_url.find("a",{"class":"remove doc_details"}).text;
+
+                paper_title_search = urllib2.urlopen(self.cite_url+search_url.find("a",{"class":"remove doc_details"})['href'])
+                paper_title_search_soup = BeautifulSoup(paper_title_search)
+                #print paper_title_search_soup.find('div', {"id":"viewHeader"}).find('h2').text
+                #print ("print %s" % search_url.find("a",{"class":"remove doc_details"}).contents)
+                #search_url.find("a",{"class":"remove doc_details"}).contents
                 # print search_url.find("span",{"class":"authors"}).text
                 # print search_url.find("span",{"class":"pubvenue"}).text
                 # print search_url.find("span",{"class":"pubyear"}).text
                 # print search_url.find("div",{"class":"snippet"}).text
                 searchObj = paperObj()
-                searchObj.insert(search_url.find("a",{"class":"remove doc_details"}).text, search_url.find("a",{"class":"remove doc_details"})['href'])
+                searchObj.insert(paper_title_search_soup.find('div', {"id":"viewHeader"}).find('h2').text, search_url.find("a",{"class":"remove doc_details"})['href'])
                 nodeSearch = SeerXNode()
                 nodeSearch.paper = searchObj
                 self.search_list.append(nodeSearch)
@@ -65,6 +78,7 @@ class citeGraph:
         nextNode.get_doc()
         nextNode.printRefCite()
 
+
 class SeerXNode:
     def __init__(self):
         self.paper = paperObj()
@@ -78,7 +92,7 @@ class SeerXNode:
         #self.paper.insert() insert title, url
         #ref
         all_ref_tar = self.doc_soup.find("div",{"id":"citations"})
-        all_ref_tar = all_ref_tar.find_all("tr")
+        all_ref_tar = all_ref_tar.findAll("tr")
         self.get_ref(all_ref_tar)
         #cite
         cite_url = self.doc_soup.find("tr",{"id":"docCites"})
@@ -98,7 +112,7 @@ class SeerXNode:
     def get_cite(self, citation_url):
         citation_soup = BeautifulSoup(urllib2.urlopen(citation_url))
         all_citation_tar = citation_soup.find("div",{"id":"result_list"})
-        all_citation_tar = all_citation_tar.find_all("div",{"class":"result"})
+        all_citation_tar = all_citation_tar.findAll("div",{"class":"result"})
         for cite in all_citation_tar:
             try:
                 # print cite.find("a",{"class":"remove doc_details"}).text
@@ -132,6 +146,10 @@ class SeerXNode:
             print ("cite url :%s" % cite.paper.url)
             print ("")
 
-testGraph = citeGraph()
-testGraph.search_title("text")
-testGraph.click_search(0)
+
+if __name__ == '__main__':
+    testGraph = citeGraph()
+    #testGraph.search_title("text")
+    textSearch = 'Adapting to Network and Client Variation Using Active Proxies'
+    testGraph.search_title(textSearch)
+    #testGraph.click_search(0)
