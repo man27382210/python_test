@@ -65,18 +65,23 @@ class citeGraph:
         return self.search_list
     
     def click_search(self, nodeIndex):
+        print nodeIndex
         newSearchNode = SeerXNode()
         newSearchNode = self.search_list[nodeIndex]
         self.node_List.append(newSearchNode)
         newSearchNode.get_doc()
-        newSearchNode.printRefCite()
-        self.click(newSearchNode.ref_list[1])
+        #newSearchNode.printRefCite()
+        return newSearchNode;
+        #self.click(newSearchNode.ref_list[1])
 
     def click(self, nextNode):
         print ("next Node : %s " % nextNode.paper.url)
         self.node_List.append(nextNode)
         nextNode.get_doc()
         nextNode.printRefCite()
+
+    def printNode(self, NodeNeedPrint):
+        NodeNeedPrint.printRefCite()
 
 
 class SeerXNode:
@@ -86,6 +91,8 @@ class SeerXNode:
     	self.ref_list = [] # SeerXNode(s)
     	self.cite_list = [] # SeerXNode(s)
         self.doc_soup = ""
+        self.titleMerge = ""
+        self.tfidfFdist = {}
 
     def get_doc(self):
         self.doc_soup = BeautifulSoup(urllib2.urlopen(self.citeseerx_url+str(self.paper.url)))
@@ -145,11 +152,19 @@ class SeerXNode:
             print ("cite title :%s" % cite.paper.title)
             print ("cite url :%s" % cite.paper.url)
             print ("")
+    
+    def mergePaperTitle():
+        for ref in self.ref_list:
+            self.titleMerge.append(ref.paper.title+', ')
+        for cite in self.cite_list:
+            self.titleMerge.append(cite.paper.title+', ')
+        print self.titleMerge
 
-
+    def tfidfCount(data):
+        return tfidfFdist
 if __name__ == '__main__':
     testGraph = citeGraph()
     #testGraph.search_title("text")
     textSearch = 'Adapting to Network and Client Variation Using Active Proxies'
     testGraph.search_title(textSearch)
-    #testGraph.click_search(0)
+    testGraph.click_search(0)
