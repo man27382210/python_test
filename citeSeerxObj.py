@@ -156,8 +156,8 @@ class SeerXNode:
     def mergePaperTitle(self):
         for ref in self.ref_list:
             self.titleMerge = self.titleMerge + ref.paper.title+', '
-        for cite in self.cite_list:
-            self.titleMerge = self.titleMerge + cite.paper.title+', '
+        # for cite in self.cite_list:
+        #     self.titleMerge = self.titleMerge + cite.paper.title+', '
         self.titleMerge = self.titleMerge + self.paper.title
         print self.titleMerge
 
