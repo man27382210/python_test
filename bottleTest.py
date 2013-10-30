@@ -1,9 +1,15 @@
 from bottle import Bottle, run, route, request, response, template
+import bottle
 import json
 import citeSeerxObj
+import googlePlusTF_IDF
 
-app = Bottle()
+app = bottle.Bottle()
 testGraph = citeSeerxObj.citeGraph()
+nltkTFIDF = googlePlusTF_IDF.ntlk_tf_idf()
+resultObj = citeSeerxObj.SeerXNode()
+app.config['mixTitle'] = ''
+print app.config
 
 @app.route('/hello')
 def hello():
@@ -26,6 +32,8 @@ def index():
 def index():
 	textIndex = request.query.queryIndex
 	resultObj = testGraph.click_search(int(textIndex))
+	app.config['mixTitle'] = resultObj.titleMerge
+	print app.config['mixTitle']
 	jsonob = {}
 	jsonRefArray = []
 	jsonCiteArray = []
@@ -40,5 +48,12 @@ def index():
 	jsonObj = json.dumps(jsonob)
 	return jsonObj
 
+@app.route('/counttfidf')
+def index():
+	print "titleMergeTwo"
+	print app.config['mixTitle']
+	print nltkTFIDF.searchForTitleTFIDF(app.config['mixTitle'])
+	jsonObj = json.dumps(nltkTFIDF.searchForTitleTFIDF(app.config['mixTitle']))
+	return jsonObj
 
 run(app, host='localhost', port=8080)

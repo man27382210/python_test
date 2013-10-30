@@ -70,6 +70,7 @@ class citeGraph:
         newSearchNode = self.search_list[nodeIndex]
         self.node_List.append(newSearchNode)
         newSearchNode.get_doc()
+        newSearchNode.mergePaperTitle()
         #newSearchNode.printRefCite()
         return newSearchNode;
         #self.click(newSearchNode.ref_list[1])
@@ -92,7 +93,6 @@ class SeerXNode:
     	self.cite_list = [] # SeerXNode(s)
         self.doc_soup = ""
         self.titleMerge = ""
-        self.tfidfFdist = {}
 
     def get_doc(self):
         self.doc_soup = BeautifulSoup(urllib2.urlopen(self.citeseerx_url+str(self.paper.url)))
@@ -153,15 +153,14 @@ class SeerXNode:
             print ("cite url :%s" % cite.paper.url)
             print ("")
     
-    def mergePaperTitle():
+    def mergePaperTitle(self):
         for ref in self.ref_list:
-            self.titleMerge.append(ref.paper.title+', ')
+            self.titleMerge = self.titleMerge + ref.paper.title+', '
         for cite in self.cite_list:
-            self.titleMerge.append(cite.paper.title+', ')
+            self.titleMerge = self.titleMerge + cite.paper.title+', '
+        self.titleMerge = self.titleMerge + self.paper.title
         print self.titleMerge
 
-    def tfidfCount(data):
-        return tfidfFdist
 if __name__ == '__main__':
     testGraph = citeGraph()
     #testGraph.search_title("text")
