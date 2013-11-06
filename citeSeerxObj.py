@@ -65,7 +65,7 @@ class citeGraph:
         return self.search_list
     
     def click_search(self, nodeIndex):
-        print nodeIndex
+        #print nodeIndex
         newSearchNode = SeerXNode()
         newSearchNode = self.search_list[nodeIndex]
         self.node_List.append(newSearchNode)
@@ -79,7 +79,9 @@ class citeGraph:
         print ("next Node : %s " % nextNode.paper.url)
         self.node_List.append(nextNode)
         nextNode.get_doc()
-        nextNode.printRefCite()
+        nextNode.mergePaperTitle()
+        return nextNode;
+        #nextNode.printRefCite()
 
     def printNode(self, NodeNeedPrint):
         NodeNeedPrint.printRefCite()
@@ -155,10 +157,9 @@ class SeerXNode:
     
     def mergePaperTitle(self):
         for ref in self.ref_list:
-            self.titleMerge = self.titleMerge + ref.paper.title+', '
+            self.titleMerge = self.titleMerge + ref.paper.title+' '
         # for cite in self.cite_list:
         #     self.titleMerge = self.titleMerge + cite.paper.title+', '
-        self.titleMerge = self.titleMerge + self.paper.title
         print self.titleMerge
 
 if __name__ == '__main__':
@@ -166,4 +167,9 @@ if __name__ == '__main__':
     #testGraph.search_title("text")
     textSearch = 'Adapting to Network and Client Variation Using Active Proxies'
     testGraph.search_title(textSearch)
-    testGraph.click_search(0)
+    levelZeroNode = SeerXNode()
+    levelNextList = []
+    levelZeroNode = testGraph.click_search(0)
+    for nextNode in levelZeroNode.ref_list:
+        levelNextList.append(testGraph.click(nextNode))
+    print levelNextList

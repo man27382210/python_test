@@ -20,6 +20,9 @@ class ntlk_tf_idf:
             #print rank, word, fdist[word]
             self.rf_List.append(dist)
         return self.rf_List;
+
+    def idf(self, data):
+        print data      
 if __name__ == '__main__':
     nltkTFIDF = ntlk_tf_idf()
     #testGraph.search_title("text")

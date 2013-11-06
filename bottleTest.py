@@ -33,7 +33,6 @@ def index():
 	textIndex = request.query.queryIndex
 	resultObj = testGraph.click_search(int(textIndex))
 	app.config['mixTitle'] = resultObj.titleMerge
-	print app.config['mixTitle']
 	jsonob = {}
 	jsonRefArray = []
 	jsonCiteArray = []
@@ -50,7 +49,6 @@ def index():
 
 @app.route('/counttfidf')
 def index():
-	print "titleMergeTwo"
 	print app.config['mixTitle']
 	print nltkTFIDF.searchForTitleTFIDF(app.config['mixTitle'])
 	jsonObj = json.dumps(nltkTFIDF.searchForTitleTFIDF(app.config['mixTitle']))
