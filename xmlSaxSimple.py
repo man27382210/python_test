@@ -18,6 +18,7 @@ class ABContendHandler(xml.sax.ContentHandler):
 
  	def characters(self, content):
  		print("charactres:"+content)
+        
 def main(sourceFileName):
 	source=open(sourceFileName)
 	xml.sax.parse(source, ABContendHandler())
