@@ -24,4 +24,4 @@ class InvertedIndex(Document):
         name = 'InvertedIndex'
     _id = Field(schema.ObjectId)
     term = Field(str) #the term
-    docs = Field([dict(id=str, tf=int)])
+    docs = Field([dict(id=str, tf=int)]) #doc id and tf in the document
