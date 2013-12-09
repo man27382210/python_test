@@ -29,9 +29,13 @@ class ntlk_tf_idf:
         title = title.split(" ")
         for text in title:
             syns = wordnet.synsets(text)
+            # print "syns: %s" %syns 
             array = [l.name for s in syns for l in s.lemmas]
+            # print "array first: %s" %array 
+            array = [word for word in array if word not in self.UnwantList]
+            # print "array: %s" %array
             self.UnwantList.extend(array)
-        print "UnwantList%s"% self.UnwantList
+        print "UnwantList:%s"% self.UnwantList
 
     def removeWord(self, textArray):
         textArray = [ word for word in textArray if word not in stopwords.words("english")]

@@ -10,12 +10,12 @@ class Paper(Document):
         session = session
         name = 'paper'
 
-    _id = Field(str) #10.x.x...
+    # _id = Field(str) #10.x.x...
     title = Field(str) #paper title
     abstart = Field(str) #paper abstart
     url = Field(str) #paper url
-    defpaper = Field([str]) #put ref paper id
-    citebypaper = Field([str]) #put cite paper id
+    defpaper = Field([dict(title=str, url=str)])
+    # citebypaper = Field([str]) #put cite paper id
 
 
 class InvertedIndex(Document):

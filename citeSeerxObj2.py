@@ -2,7 +2,7 @@ from BeautifulSoup import BeautifulSoup, NavigableString
 import urllib2
 import sys
 import re
-from paperMiningSchema import Paper, InvertedIndex
+from paperMiningSchema import Paper
 
 class paperObj:
     def __init__(self):
