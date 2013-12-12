@@ -19,7 +19,7 @@ def fullUrl(url):
 
 def rePunctuation(title):
         out = re.sub('[%s]' % re.escape(string.punctuation), "", title)
-        return out
+        return out.lower()
 
 def parsePaper(urlUse, level):
     soup = BeautifulSoup(urllib2.urlopen(fullUrl(urlUse)))

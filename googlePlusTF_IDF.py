@@ -6,6 +6,8 @@ from math import log
 from nltk.corpus import wordnet
 from nltk.corpus import stopwords
 nltk.download('stopwords')
+import json
+
 class ntlk_tf_idf:
     """docstring for ntlk_tf_idf"""
     def __init__(self):
@@ -78,17 +80,21 @@ class ntlk_tf_idf:
 
 if __name__ == '__main__':
     nltkTFIDF = ntlk_tf_idf()
-    levelDict = { '1':
-   [ 'Spatio-temporal frequency analysis for removing rain and snow from videos',
-     'A Multi-Layered Display with Water Drops' ],
-    '2':
-   [ 'Detection and removal of rain from videos',
-     'When does a camera see rain',
-     'Why is Snow So Bright',
-     'RAIN REMOVAL IN VIDEO BY COMBINING TEMPORAL AND CHROMATIC PROPERTIES',
-     'A projector-camera system for creating a display with water drops',
-     'An Immaterial Depth-Fused 3D Display' ] }
-    for x in xrange(1,len(levelDict)+1):
+   #  levelDict = { '1':
+   # [ 'Spatio-temporal frequency analysis for removing rain and snow from videos',
+   #   'A Multi-Layered Display with Water Drops' ],
+   #  '2':
+   # [ 'Detection and removal of rain from videos',
+   #   'When does a camera see rain',
+   #   'Why is Snow So Bright',
+   #   'RAIN REMOVAL IN VIDEO BY COMBINING TEMPORAL AND CHROMATIC PROPERTIES',
+   #   'A projector-camera system for creating a display with water drops',
+   #   'An Immaterial Depth-Fused 3D Display' ] }
+    json_data=open('data2.json')
+    levelDict = json.load(json_data)
+    json_data.close()
+    # levelDict = {"1": ["The google file system", "Efficient dispersal of information for security load balancing and fault tolerance", "Clusterbased scalable network services", "Distributed Computing in Practice The Condor Experience\u201d Concurrency and Computation Practice and Experience", "Parallel prefix computation", "Scans as primitive parallel operations", "Charlotte Metacomputing on the Web", "Mapreduce for machine learning on multicore", "Evaluating MapReduce for multicore and multiprocessor systems", "Cluster io with river making the fast case common", "High performance sorting on networks of workstations", "Diamond A storage architecture for early discard in interactive search", "Active Disks for LargeScale Data Processing", "Explicit control a batchaware distributed file system", "H\u00f6lzle Web search for a planet the Google cluster architecture", "Systematic efficient parallelization of scan and other list homomorphisms", "Computation Practice and Experience", "10 Jim Gray Sort benchmark home", "Sort benchmark home page http research microsoft com barc SortBenchmark"]}
+    for x in xrange(3,len(levelDict)+1):
         levelUse = levelDict[str(x)]
         print nltkTFIDF.computeTFIDf(nltkTFIDF.idf(levelUse, nltkTFIDF.tf(levelUse)))
         print        
