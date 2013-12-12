@@ -27,16 +27,16 @@ def parsePaper(urlUse, level):
     node.defpaper = []
     try:
         node.title = rePunctuation(soup.find('div', {"id":"viewHeader"}).find('h2').text)
-        node.url = urlUse
+        node._id = urlUse
         print "title :%s" % node.title
-        print "url :%s" % node.url
+        print "_id :%s" % node._id
         print "level :%s" % level
-        if level < 3:
+        if level < 5:
             try:
                 refList = soup.find("div",{"id":"citations"})
                 refListUse = refList.findAll("tr")
                 for ref in refListUse:
-                    refDict = {"title":rePunctuation(ref.find("a").text), "url":ref.find("a")['href']}
+                    refDict = {"title":rePunctuation(ref.find("a").text), "_id":ref.find("a")['href']}
                     if refDict["title"].find("et al") == -1:
                         node.defpaper.append(refDict)
                     else:
@@ -45,7 +45,7 @@ def parsePaper(urlUse, level):
                 print ('no ref')
             node.m.save()
         for refDictUse in node.defpaper:
-            parsePaper(refDictUse['url'], level+1)
+            parsePaper(refDictUse['_id'], level+1)
     except Exception, e:
         print "error"
         pass
