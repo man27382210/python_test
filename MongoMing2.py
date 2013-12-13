@@ -1,7 +1,8 @@
 from ming import Session, create_datastore
 from ming import Document, Field, schema
 
-bind = create_datastore('mongodb://114.34.79.27:27017/paperMiningTest')
+# bind = create_datastore('mongodb://114.34.79.27:27017/paperMiningTest')
+bind = create_datastore('mongodb://localhost/paperMiningTest')
 session = Session(bind)
 
 class Paper(Document):

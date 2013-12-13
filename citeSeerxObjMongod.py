@@ -25,7 +25,7 @@ def parsePaper(urlUse, level):
         print "url :%s" % node.url
         print "level :%s" % level
         print "abs: %s" % node.abstart
-        if level < 2:
+        if level < 3:
             try:
                 refList = soup.find("div",{"id":"citations"})
                 refListUse = refList.findAll("tr")
@@ -75,6 +75,6 @@ def getCite(citationUrl, node):
 
 if __name__ == '__main__':
     # url = "/viewdoc/summary?doi=10.1.1.163.5292"
-    url = "/viewdoc/summary?doi=10.1.1.53.6203"
+    url = "/viewdoc/summary?doi=10.1.1.51.5013"
     parsePaper(url, 0)
         
