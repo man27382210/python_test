@@ -58,7 +58,7 @@ def getCite(citationUrl, node):
     all_citation_tar = all_citation_tar.findAll("div",{"class":"result"})
     for cite in all_citation_tar:
         try:
-            citeDict = {"title":cite.find("a",{"class":"remove doc_details"}).text, "url":cite.find("a",{"class":"remove doc_details"})['href']}
+            citeDict = {"title":rePunctuation(cite.find("a",{"class":"remove doc_details"}).text), "url":cite.find("a",{"class":"remove doc_details"})['href']}
             if citeDict["title"].find("et al") == -1:
                 node.citebypaper.append(citeDict)
             else:
