@@ -37,17 +37,17 @@ def parsePaper(urlUse, level):
                         print "have et al"
             except Exception, e:
                 print ('no ref')
-            try:
-                citeUrl = soup.find("tr",{"id":"docCites"})
-                citeUrl = fullUrl(citeUrl.find('a')['href'])
-                getCite(citeUrl, node)
-            except Exception, e:
-                print ('no citetation')
+            # try:
+            #     citeUrl = soup.find("tr",{"id":"docCites"})
+            #     citeUrl = fullUrl(citeUrl.find('a')['href'])
+            #     getCite(citeUrl, node)
+            # except Exception, e:
+            #     print ('no citetation')
             node.m.save()
         for refDictUse in node.defpaper:
             parsePaper(refDictUse['url'], level+1)
-        for citeDictUse in node.citebypaper:
-            parsePaper(citeDictUse['url'], level+1)
+        # for citeDictUse in node.citebypaper:
+        #     parsePaper(citeDictUse['url'], level+1)
     except Exception, e:
         print "e :%s" % e
         print "Exception %s" %Exception
@@ -74,7 +74,7 @@ def getCite(citationUrl, node):
             print ("exception push in")
 
 if __name__ == '__main__':
-    # url = "/viewdoc/summary?doi=10.1.1.163.5292"
-    url = "/viewdoc/summary?doi=10.1.1.51.5013"
+    url = "/viewdoc/summary?doi=10.1.1.163.5292"
+    # url = "/viewdoc/summary?doi=10.1.1.51.5013"
     parsePaper(url, 0)
         
