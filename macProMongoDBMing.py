@@ -10,8 +10,8 @@ class paperItem(Document):
     """docstring for paperItem"""
     class __mongometa__:
         session = session
-        # name = 'citeSeerx_copy'
-        name = 'citeSeerx'
+        name = 'citeSeerx_copy'
+    #name = 'citeSeerx'
     paperTitle = Field(str)
     authors = Field(str)
     year = Field(str)
