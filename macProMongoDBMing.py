@@ -26,6 +26,13 @@ if __name__ == '__main__':
     papers = paperItem.m.find().all()
     for paper in papers:
         for ref in paper['ref']:
-            for citePaper in papers:
-                if citePaper['_id'] == ref:
-                    citePaper['cite'].append(ref)
+            print ref
+            # for citePaper in papers:
+            #     if citePaper['_id'] == ref:
+            #         citePaper['cite'].append(ref)
+            citePaper = paperItem.m.find({"_id":ref})
+            if citePaper is None:
+                print "no this paper"
+            else:
+                citePaper['cite'].append(ref)
+                print citePaper['cite']
