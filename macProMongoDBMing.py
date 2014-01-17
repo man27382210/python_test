@@ -10,7 +10,8 @@ class paperItem(Document):
     """docstring for paperItem"""
     class __mongometa__:
         session = session
-        name = 'citeSeerx_copy'
+        # name = 'citeSeerx_copy'
+        name = 'citeSeerx'
     paperTitle = Field(str)
     authors = Field(str)
     year = Field(str)
@@ -30,7 +31,7 @@ if __name__ == '__main__':
             # for citePaper in papers:
             #     if citePaper['_id'] == ref:
             #         citePaper['cite'].append(ref)
-            citePaper = paperItem.m.find({"_id":ref})
+            citePaper = paperItem.m.find({"_id":ref}).first()
             if citePaper is None:
                 print "no this paper"
             else:
