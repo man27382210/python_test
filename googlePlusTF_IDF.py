@@ -93,8 +93,7 @@ if __name__ == '__main__':
     json_data=open('data2.json')
     levelDict = json.load(json_data)
     json_data.close()
-    # levelDict = {"1": ["The google file system", "Efficient dispersal of information for security load balancing and fault tolerance", "Clusterbased scalable network services", "Distributed Computing in Practice The Condor Experience\u201d Concurrency and Computation Practice and Experience", "Parallel prefix computation", "Scans as primitive parallel operations", "Charlotte Metacomputing on the Web", "Mapreduce for machine learning on multicore", "Evaluating MapReduce for multicore and multiprocessor systems", "Cluster io with river making the fast case common", "High performance sorting on networks of workstations", "Diamond A storage architecture for early discard in interactive search", "Active Disks for LargeScale Data Processing", "Explicit control a batchaware distributed file system", "H\u00f6lzle Web search for a planet the Google cluster architecture", "Systematic efficient parallelization of scan and other list homomorphisms", "Computation Practice and Experience", "10 Jim Gray Sort benchmark home", "Sort benchmark home page http research microsoft com barc SortBenchmark"]}
-    for x in xrange(3,len(levelDict)+1):
+    for x in xrange(1,len(levelDict)+1):
         levelUse = levelDict[str(x)]
         print nltkTFIDF.computeTFIDf(nltkTFIDF.idf(levelUse, nltkTFIDF.tf(levelUse)))
         print        

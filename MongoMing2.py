@@ -1,8 +1,8 @@
 from ming import Session, create_datastore
 from ming import Document, Field, schema
 
-# bind = create_datastore('mongodb://114.34.79.27:27017/paperMiningTest')
-bind = create_datastore('mongodb://localhost/paperMiningTest')
+bind = create_datastore('mongodb://114.34.79.27:27017/paperMiningTest')
+# bind = create_datastore('mongodb://localhost/paperMiningTest')
 session = Session(bind)
 
 class Paper(Document):
@@ -26,3 +26,6 @@ class InvertedIndex(Document):
     _id = Field(schema.ObjectId)
     term = Field(str) #the term
     docs = Field([dict(id=str, tf=int)]) #doc id and tf in the document
+
+if __name__ == '__main__':
+    print len(Paper.m.find().all())
