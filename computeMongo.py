@@ -11,6 +11,7 @@ if __name__ == '__main__':
     firstNode = MongoMing2.Paper.m.find({"url":"/viewdoc/summary?doi=10.1.1.163.5292"}).first()
     for paper in firstNode['defpaper']:
         dict = {"title":paper['title'], "url":paper['url']}
+        print dict
         levelZero.append(dict)
 
     for levelZeroPaper in levelZero:
@@ -61,10 +62,10 @@ if __name__ == '__main__':
         listTwoTitle.append(paper['title'])
     dic = {'1':listZeroTitle, '2':listOneTitle, '3':listTwoTitle}
 
-    print 'listZeroTitle :%s' % len(listZeroTitle)
-    print 'listOneTitle :%s' % len(listOneTitle)
-    print 'listTwoTitle :%s' % len(listTwoTitle)
+    print 'listZeroTitle :%s' % listZeroTitle
+    print 'listOneTitle :%s' % listOneTitle
+    print 'listTwoTitle :%s' % listTwoTitle
 
-    # with open('data2.json', 'w') as outfile:
-    #     json.dump(dic, outfile)
+    with open('data2.json', 'w') as outfile:
+        json.dump(dic, outfile)
     

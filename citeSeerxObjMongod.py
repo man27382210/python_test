@@ -10,6 +10,7 @@ def fullUrl(url):
 
 def rePunctuation(title):
         out = re.sub('[%s]' % re.escape(string.punctuation), "", title)
+        out = ''.join(i for i in out if not i.isdigit())
         return out.lower()
 
 def parsePaper(urlUse, level):
