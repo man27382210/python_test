@@ -35,6 +35,6 @@ if __name__ == '__main__':
             if citePaper is None:
                 print "no this paper"
             else:
-                citePaper['cite'].append(ref)
+                citePaper['cite'].append(paper['_id'])
                 print citePaper['cite']
                 citePaper.m.save()
