@@ -37,4 +37,4 @@ if __name__ == '__main__':
             else:
                 citePaper['cite'].append(ref)
                 print citePaper['cite']
-                paperItem.m.save()
+                citePaper.m.save()
