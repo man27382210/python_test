@@ -66,6 +66,6 @@ if __name__ == '__main__':
     print 'listOneTitle :%s' % listOneTitle
     print 'listTwoTitle :%s' % listTwoTitle
 
-    with open('data2.json', 'w') as outfile:
+    with open('data3.json', 'w') as outfile:
         json.dump(dic, outfile)
     

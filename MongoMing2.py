@@ -9,14 +9,17 @@ class Paper(Document):
 
     class __mongometa__:
         session = session
-        name = 'paperWithAbs'
+        name = 'paperVGI'
+        # name = 'paperYearOp'
 
     # _id = Field(str) #10.x.x...
     title = Field(str) #paper title
     abstart = Field(str) #paper abstart
     url = Field(str) #paper url
-    defpaper = Field([dict(title=str, url=str)])
-    citebypaper = Field([dict(title=str, url=str)]) #put cite paper id
+    # paperid = Field(str) #10.x.x...
+    year = Field(str) #20xx
+    # defpaper = Field([dict(title=str, url=str)])
+    # citebypaper = Field([dict(title=str, url=str)]) #put cite paper id
 
 
 class InvertedIndex(Document):

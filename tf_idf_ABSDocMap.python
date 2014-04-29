@@ -81,29 +81,18 @@ class ntlk_tf_idf:
 
 if __name__ == '__main__':
     nltkTFIDF = ntlk_tf_idf()
-   #  levelDict = { '1':
-   # [ 'Spatio-temporal frequency analysis for removing rain and snow from videos',
-   #   'A Multi-Layered Display with Water Drops' ],
-   #  '2':
-   # [ 'Detection and removal of rain from videos',
-   #   'When does a camera see rain',
-   #   'Why is Snow So Bright',
-   #   'RAIN REMOVAL IN VIDEO BY COMBINING TEMPORAL AND CHROMATIC PROPERTIES',
-   #   'A projector-camera system for creating a display with water drops',
-   #   'An Immaterial Depth-Fused 3D Display' ] }
-    json_data=open('data2.json')
-    levelDict = json.load(json_data)
-    json_data.close()
-    json_data=open('file1.json')
+    json_data=open('ABSDocMap.json')
     tokenDict = json.load(json_data)
     json_data.close()
-    for x in xrange(1,len(levelDict)+1):
-        levelUse = levelDict[str(x)]
-        tokenUse = tokenDict[str(x)]
-        arraySave = nltkTFIDF.computeTFIDf(nltkTFIDF.idf(levelUse, nltkTFIDF.tf(levelUse, tokenUse)))
-        print arraySave
-        with open('result.json', 'a') as outfile:
-            outfile.write("%s\n"%str(x))
-            for item in arraySave:
-                 outfile.write("%s\n"%item)
-        print
+
+
+    # for x in xrange(1,len(levelDict)+1):
+    #     levelUse = levelDict[str(x)]
+    #     tokenUse = tokenDict[str(x)]
+    #     arraySave = nltkTFIDF.computeTFIDf(nltkTFIDF.idf(levelUse, nltkTFIDF.tf(levelUse, tokenUse)))
+    #     print arraySave
+    #     with open('result.json', 'a') as outfile:
+    #         outfile.write("%s\n"%str(x))
+    #         for item in arraySave:
+    #              outfile.write("%s\n"%item)
+    #     print
