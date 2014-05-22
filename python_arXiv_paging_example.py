@@ -52,6 +52,8 @@ for i in range(start,total_results,results_per_iteration):
 
     # Run through each entry, and print out information
     for entry in feed.entries:
+        print 'entry :%s' %entry
+
         print 'arxiv-id: %s' % entry.id.split('/abs/')[-1]
         print 'Title:  %s' % entry.title
         # feedparser v4.1 only grabs the first author
