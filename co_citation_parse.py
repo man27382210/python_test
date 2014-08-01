@@ -21,8 +21,9 @@ if __name__ == '__main__':
         data = json.load(data_file)
     for paperId in data["CitationId"]:
         url = baseUrl + str(paperId)
-        cocitationRelationDic = json.load(urllib2.urlopen(url))[0]
-        if len(cocitationRelationDic) is not 0:
+        arr = = json.load(urllib2.urlopen(url))
+        if len(arr) is not 0:
+            cocitationRelationDic = arr[0]
             paperRel = Paper(dict(id = cocitationRelationDic["id"],cocitation = cocitationRelationDic["co_citation"]))
             paperRel.m.save()
             print paperRel
